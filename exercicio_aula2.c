@@ -16,7 +16,7 @@ typedef struct
 
 void exportarCSV(Aluno alunos[], int totalAlunos, const char *rgm)
 {
-  
+
   exibirAlunos(alunos, totalAlunos);
 }
 
@@ -216,7 +216,7 @@ int main()
       case 2:
         exibirAlunos(alunos, totalAlunos);
         break;
-
+        // PINDAMONHANGABA
         //------------------------- ADICIONAR NOTAS ------------------------------
 
       case 3:
