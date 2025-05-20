@@ -14,12 +14,6 @@ typedef struct
   int ativo;
 } Aluno;
 
-void exportarCSV(Aluno alunos[], int totalAlunos, const char *rgm)
-{
-
-  exibirAlunos(alunos, totalAlunos);
-}
-
 int validadorRGM(Aluno alunos[], int totalAlunos, char *rgm)
 {
   int comprimento = strlen(rgm);
@@ -61,14 +55,12 @@ Aluno *verificarRGM(Aluno alunos[], int totalAlunos, const char *rgm)
 
 void exibirAlunos(Aluno alunos[], int totalAlunos)
 {
-  int alunosTotais = totalAlunos;
-
-  if (alunosTotais == 0)
+  if (totalAlunos == 0)
   {
     printf("Nenhum aluno cadastrado.\n");
   }
 
-  for (int i = 0; i < alunosTotais; i++)
+  for (int i = 0; i < totalAlunos; i++)
   {
     if (alunos[i].ativo == 1)
     {
@@ -126,9 +118,64 @@ void exibirAlunos(Aluno alunos[], int totalAlunos)
 
       printf("-------------------------------------------------------------\n");
     }
+  }
+}
+void exportarCSV(Aluno alunos[], int totalAlunos)
+{
+  FILE *arquivo_notas = fopen("AlunosFaculdade.csv", "w");
+  if (arquivo_notas == NULL)
+  {
+    printf("Falha ao criar arquivo.\n");
+  }
+  else
+  {
+    fprintf(arquivo_notas, "RGM, Nome, A1 , A2 , AF, Situacao\n");
+
+    if (totalAlunos == 0)
+    {
+      printf("Nenhum aluno para registrar.\n");
+    }
     else
     {
-      printf("  ");
+      for (int i = 0; i < totalAlunos; i++)
+      {
+        if (alunos[i].ativo == 1)
+        {
+          fprintf(arquivo_notas, "%s, %s,", alunos[i].rgm, alunos[i].nome);
+
+          if (alunos[i].n1 == -1)
+            fprintf(arquivo_notas, "Nota nao inserida,");
+          else
+            fprintf(arquivo_notas, " %d,", alunos[i].n1);
+
+          if (alunos[i].n2 == -1)
+            fprintf(arquivo_notas, "Nota nao inserida,");
+          else
+            fprintf(arquivo_notas, " %d,", alunos[i].n2);
+
+          if (alunos[i].n3 == -1)
+            fprintf(arquivo_notas, "Nota nao inserida,");
+          else
+            fprintf(arquivo_notas, " %d,", alunos[i].n3);
+
+          if (alunos[i].n1 + alunos[i].n2 >= 6 || alunos[i].n1 + alunos[i].n3 >= 6 || alunos[i].n2 + alunos[i].n3 >= 6)
+          {
+            alunos[i].situacao = 1;
+            fprintf(arquivo_notas, " %d\n", alunos[i].situacao);
+          }
+          if (alunos[i].n1 + alunos[i].n2 < 6 || alunos[i].n1 + alunos[i].n3 < 6 || alunos[i].n2 + alunos[i].n3 < 6)
+          {
+            alunos[i].situacao = 1;
+            fprintf(arquivo_notas, " %d\n", alunos[i].situacao);
+          }
+          else
+          {
+            fprintf(arquivo_notas, " %d\n", alunos[i].situacao);
+          }
+        }
+      }
+      fclose(arquivo_notas);
+      printf("Arquivo exportado!\n");
     }
   }
 }
@@ -512,7 +559,7 @@ int main()
               {
                 while (case6 == 0)
                 {
-                  printf("Calculando nota final de: %s", alunoEncontrado->nome);
+                  printf("Calculando nota final de: %s\n", alunoEncontrado->nome);
                   printf("Digite o valor da nota obtida na AF: ");
                   if (scanf("%d", &alunoEncontrado->n3) == 0)
                   { // O valor informado e colocado na "n3" do aluno com o indice informado.
@@ -669,7 +716,7 @@ int main()
 
       //---------------------- EXPORTAR PARA CSV -----------------------------
       case 9:
-
+        exportarCSV(alunos, totalAlunos);
         break;
       //----------------------- LIMPAR TERMINAL -----------------------------
       case 10:
