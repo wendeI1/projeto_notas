@@ -70,7 +70,7 @@ void exibirAlunos(Aluno alunos[], int totalAlunos)
 
   for (int i = 0; i < alunosTotais; i++)
   {
-    if (alunos[i].ativo == 1)
+    if (alunos[i].ativo == 0)
     {
       printf("RGM: %s | Aluno: %s\n", alunos[i].rgm, alunos[i].nome);
       if (alunos[i].n1 == -1)
