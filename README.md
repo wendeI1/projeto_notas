@@ -38,7 +38,14 @@ Este projeto é um sistema simples feito em C para gerenciar notas de alunos. El
 
 ```plaintext
 📁 Projeto/
-├── main.c         # Arquivo principal com o menu e chamadas de função
-├── README.md      # Este arquivo
+├── LICENSE                 # Licença MIT
+├── projeto_notas.c         # Arquivo principal com o menu e chamadas de função
+├── README.md               # Este arquivo
 ```
+---
+
+## ⚠️ Aviso
+Este projeto foi desenvolvido por mim, Wendel, durante o meu primeiro semestre do curso de Ciência da Computação.
+Ainda estou aprendendo os fundamentos da linguagem C e começando a usar o GitHub, então é possível que o código contenha falhas, más práticas ou esteja em desenvolvimento constante.
+Toda sugestão ou feedback construtivo é muito bem-vindo! 🙌
 
