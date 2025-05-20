@@ -263,7 +263,6 @@ int main()
       case 2:
         exibirAlunos(alunos, totalAlunos);
         break;
-        // PINDAMONHANGABA
         //------------------------- ADICIONAR NOTAS ------------------------------
 
       case 3:
