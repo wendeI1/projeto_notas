@@ -39,7 +39,7 @@ Este projeto é um sistema simples feito em C para gerenciar notas de alunos. El
 ```plaintext
 📁 Projeto/
 ├── LICENSE                 # Licença MIT
-├── projeto_notas.c         # Arquivo principal com o menu e chamadas de função
+├── projeto_notas.c         # Arquivo principal
 ├── README.md               # Este arquivo
 ```
 ---
