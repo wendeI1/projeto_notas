@@ -55,12 +55,14 @@ Aluno *verificarRGM(Aluno alunos[], int totalAlunos, const char *rgm)
 
 void exibirAlunos(Aluno alunos[], int totalAlunos)
 {
-  if (totalAlunos == 0)
+  int alunosTotais = totalAlunos;
+
+  if (alunosTotais == 0)
   {
     printf("Nenhum aluno cadastrado.\n");
   }
 
-  for (int i = 0; i < totalAlunos; i++)
+  for (int i = 0; i < alunosTotais; i++)
   {
     if (alunos[i].ativo == 1)
     {
@@ -68,6 +70,10 @@ void exibirAlunos(Aluno alunos[], int totalAlunos)
       if (alunos[i].n1 == -1)
       {
         printf("A1: Nota nao informada.\n");
+      }
+      else if (alunos[i].n1 == -2)
+      {
+        printf("Nota substituida por AF.\n");
       }
       else
       {
@@ -77,13 +83,17 @@ void exibirAlunos(Aluno alunos[], int totalAlunos)
       {
         printf("A2: Nota nao informada.\n");
       }
+      else if (alunos[i].n2 == -2)
+      {
+        printf("Nota substituida por AF.\n");
+      }
       else
       {
         printf("A2: %d\n", alunos[i].n2);
       }
       if (alunos[i].n3 == -1) // Nota da AF
       {
-        printf("AF: Nota nao informada.\n");
+        printf("AF: Prova nao realizada ou excluida.\n");
       }
       else
       {
@@ -118,6 +128,10 @@ void exibirAlunos(Aluno alunos[], int totalAlunos)
 
       printf("-------------------------------------------------------------\n");
     }
+    else
+    {
+      printf("  ");
+    }
   }
 }
 void exportarCSV(Aluno alunos[], int totalAlunos)
@@ -144,33 +158,50 @@ void exportarCSV(Aluno alunos[], int totalAlunos)
           fprintf(arquivo_notas, "%s, %s,", alunos[i].rgm, alunos[i].nome);
 
           if (alunos[i].n1 == -1)
+          {
             fprintf(arquivo_notas, "Nota nao inserida,");
+          }
+          else if (alunos[i].n1 == -2)
+          {
+            fprintf(arquivo_notas, "Nota substituida por AF,");
+          }
           else
+          {
             fprintf(arquivo_notas, " %d,", alunos[i].n1);
-
+          }
           if (alunos[i].n2 == -1)
+          {
             fprintf(arquivo_notas, "Nota nao inserida,");
+          }
+          else if (alunos[i].n2 == -2)
+          {
+            fprintf(arquivo_notas, "Nota substituida por AF,");
+          }
           else
+          {
             fprintf(arquivo_notas, " %d,", alunos[i].n2);
-
+          }
           if (alunos[i].n3 == -1)
+          {
             fprintf(arquivo_notas, "Nota nao inserida,");
+          }
           else
+          {
             fprintf(arquivo_notas, " %d,", alunos[i].n3);
-
+          }
           if (alunos[i].n1 + alunos[i].n2 >= 6 || alunos[i].n1 + alunos[i].n3 >= 6 || alunos[i].n2 + alunos[i].n3 >= 6)
           {
             alunos[i].situacao = 1;
-            fprintf(arquivo_notas, " %d\n", alunos[i].situacao);
+            fprintf(arquivo_notas, " %d,\n", alunos[i].situacao);
           }
-          if (alunos[i].n1 + alunos[i].n2 < 6 || alunos[i].n1 + alunos[i].n3 < 6 || alunos[i].n2 + alunos[i].n3 < 6)
+          else if (alunos[i].n1 + alunos[i].n2 < 6 || alunos[i].n1 + alunos[i].n3 < 6 || alunos[i].n2 + alunos[i].n3 < 6)
           {
             alunos[i].situacao = 1;
-            fprintf(arquivo_notas, " %d\n", alunos[i].situacao);
+            fprintf(arquivo_notas, " %d,", alunos[i].situacao);
           }
           else
           {
-            fprintf(arquivo_notas, " %d\n", alunos[i].situacao);
+            fprintf(arquivo_notas, " %d,", alunos[i].situacao);
           }
         }
       }
@@ -192,7 +223,7 @@ int main()
   {
     printf("\n ----- Bem vindo ao sistema de gerenciamento de notas!-----");
     printf("\n|                   O que deseja fazer?                    |");
-    printf("\n|    1 - Cadastrar aluno         6 - Calcular situacao     |");
+    printf("\n|    1 - Cadastrar aluno         6 - Calcular aprovacao    |");
     printf("\n|    2 - Exibir alunos           7 - Excluir notas         |");
     printf("\n|    3 - Adicionar notas         8 - Excluir aluno         |");
     printf("\n|    4 - Atualizar notas         9 - Exportar para .CSV    |");
@@ -263,6 +294,7 @@ int main()
       case 2:
         exibirAlunos(alunos, totalAlunos);
         break;
+        // PINDAMONHANGABA
         //------------------------- ADICIONAR NOTAS ------------------------------
 
       case 3:
@@ -452,6 +484,10 @@ int main()
           {
             printf("A1: Nota nao informada.\n");
           }
+          else if (alunoEncontrado->n1 == -2)
+          {
+            printf("Nota substituida por AF.\n");
+          }
           else
           {
             printf("A1: %d\n", alunoEncontrado->n1);
@@ -459,6 +495,10 @@ int main()
           if (alunoEncontrado->n2 == -1) // Nota da A2
           {
             printf("A2: Nota nao informada.\n");
+          }
+          else if (alunoEncontrado->n2 == -2)
+          {
+            printf("Nota substituida por AF.\n");
           }
           else
           {
@@ -527,7 +567,7 @@ int main()
           int n1 = alunoEncontrado->n1; // Para simplificar, determino que n1 e n2 assumirao os valores das notas do aluno do indice informado
           int n2 = alunoEncontrado->n2;
 
-          if (n1 == -1 || n2 == -1)
+          if (n1 == -1 && n2 == -1)
           { // Caso seja menor que 0 e Maior que 5
             printf("Notas nao informadas.\n");
             break;
@@ -541,11 +581,13 @@ int main()
             {
               notaMenor = n1;
               notaMaior = n2;
+              alunoEncontrado->n1 = -2;
             }
             else
             {
               notaMenor = n2;
               notaMaior = n1;
+              alunoEncontrado->n2 = -2;
             }
 
             if (notaFinal > 6)
