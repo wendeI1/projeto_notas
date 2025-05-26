@@ -32,7 +32,7 @@ int validadorRGM(Aluno alunos[], int totalAlunos, char *rgm)
   }
   for (int i = 0; i < totalAlunos; i++)
   {
-    if (strcmp(alunos[i].rgm, rgm) == 0)
+    if (alunos->ativo == 1 && strcmp(alunos[i].rgm, rgm) == 0)
     {
       return 0;
     }
@@ -214,35 +214,36 @@ void exportarCSV(Aluno alunos[], int totalAlunos)
 int main()
 {
 
-  Aluno alunos[TAMANHO];                             // Var do tipo aluno. Armazena cada aluno diferente
-  int totalAlunos = 0;                               // Contabiliza os alunos
-  int sair = 0;                                      // Condicao do laco de repticao do menu
-  int escolha_MENU, escolha_ADnota, escolha_EX_nota; // Escolhas usadas no switch
+  Aluno alunos[TAMANHO];                              // Var do tipo aluno. Armazena cada aluno diferente
+  int totalAlunos = 0;                                // Contabiliza os alunos
+  int sair = 0;                                       // Condicao do laco de repticao do menu
+  int escolhaMenu, escolhaAdNota, escolhaExcluirNota; // Escolhas usadas no switch
 
   while (sair == 0)
   {
+    system("cls");
+
     printf("\n ----- Bem vindo ao sistema de gerenciamento de notas!-----");
     printf("\n|                   O que deseja fazer?                    |");
     printf("\n|    1 - Cadastrar aluno         6 - Calcular aprovacao    |");
     printf("\n|    2 - Exibir alunos           7 - Excluir notas         |");
     printf("\n|    3 - Adicionar notas         8 - Excluir aluno         |");
     printf("\n|    4 - Atualizar notas         9 - Exportar para .CSV    |");
-    printf("\n|    5 - Consultar aluno        10 - Limpar terminal       |");
-    printf("\n|                      11 - Sair                           |");
+    printf("\n|    5 - Consultar aluno        10 - Sair                  |");
     printf("\n ----------------------------------------------------------");
     printf("\n                   Escolha uma opcao: ");
 
-    if (scanf("%d", &escolha_MENU) == 0)
-    {                            // Aqui, verifica se o input do usuario e int ou nao , e logo apos limpa o buffer para nao ocasionar repeticao
-      printf("Valor invalido."); //(A verificacao e feita comparando se escolha e int por meio do "%d", comparando a um intean falso)
+    if (scanf("%2d", &escolhaMenu) == 0)
+    { // Aqui, verifica se o input do usuario e int ou nao , e logo apos limpa o buffer para nao ocasionar repeticao
+      printf("Valor invalido.");
       while (getchar() != '\n')
         ; // Limpeza de buffer para nao causar loops infinitos
+      system("pause");
     }
     else
     {
-      switch (escolha_MENU)
+      switch (escolhaMenu)
       {
-
         //-------------------------- CADASTRAR ALUNOS ----------------------------
 
       case 1:
@@ -278,13 +279,15 @@ int main()
             alunos[totalAlunos].n3 = -1;
             alunos[totalAlunos].situacao = -1; // Aqui defini-se a situacao como -1
             alunos[totalAlunos].ativo = 1;
-            printf("Aluno %s cadastrado!\n", alunos[totalAlunos].nome); // O programa acessa a struct Aluno e pega o nome para exibir
             totalAlunos++;
             sairmenuCAD = 1;
+            printf("Aluno %s cadastrado!\n", alunos[totalAlunos].nome); // O programa acessa a struct Aluno e pega o nome para exibir
+            system("pause");
           }
           else
           {
-            printf("Valor invalido e/ou ja cadastrado.\n");
+            printf("\nValor invalido e/ou ja cadastrado.\n");
+            system("pause");
           }
         }
         break;
@@ -293,8 +296,10 @@ int main()
 
       case 2:
         exibirAlunos(alunos, totalAlunos);
+        while (getchar() != '\n')
+          ;
+        system("pause");
         break;
-        // PINDAMONHANGABA
         //------------------------- ADICIONAR NOTAS ------------------------------
 
       case 3:
@@ -319,13 +324,14 @@ int main()
               printf("Valor invalido.\n");
               while (getchar() != '\n')
                 ;
+              system("pause");
             }
             else
             {
               if (validadorn1 > 5 || validadorn1 < 0)
               { // Aqui, o validador confere se a nota esta nos parametros(0 < n < 5)
                 printf("Valor invalido.\n");
-                continue;
+                system("pause");
               }
               else
               {
@@ -342,12 +348,14 @@ int main()
               printf("Valor invalido.\n");
               while (getchar() != '\n')
                 ;
+              system("pause");
             }
             else
             {
               if (validadorn2 > 5 || validadorn2 < 0)
               {
                 printf("Valor invalido.\n");
+                system("pause");
                 continue;
               }
               else
@@ -357,11 +365,13 @@ int main()
                 if (validadorn1 + validadorn2 >= 6)
                 {
                   printf("Notas adicionadas!\n");
-                  printf("O aluno esta aprovado!\n");
+                  printf("\nO aluno esta aprovado!\n");
+                  system("pause");
                 }
                 else
                 {
-                  printf("O aluno esta reprovado! Portanto, e necessario realizar a AF.\n");
+                  printf("\nO aluno esta reprovado! Portanto, e necessario realizar a AF.\n");
+                  system("pause");
                 }
                 laco2 = 1;
               }
@@ -370,7 +380,8 @@ int main()
         }
         else
         {
-          printf("Aluno nao cadastrado e/ou valor invalido.\n");
+          printf("\nAluno nao cadastrado e/ou valor invalido.\n");
+          system("pause");
           break;
         }
         break;
@@ -391,7 +402,8 @@ int main()
         {
           if (alunoEncontrado->n1 == -1 || alunoEncontrado->n2 == -1)
           { // Caso as notas sejam -1 (definidas como padroes), as notas nao sao informadas
-            printf("Notas nao informadas\n");
+            printf("\nNotas nao informadas\n");
+            system("pause");
             break;
           }
           printf("\n ---------- Atualizar notas ------------");
@@ -401,13 +413,14 @@ int main()
           printf("\n ---------------------------------------");
           printf("\n          Escolha uma opcao: ");
 
-          if (scanf("%d", &escolha_ADnota) == 0)
+          if (scanf("%d", &escolhaAdNota) == 0)
           {
             printf("Valor invalido.\n");
             while (getchar() != '\n')
               ;
+            system("pause");
           }
-          switch (escolha_ADnota)
+          switch (escolhaAdNota)
           {
           case 1:
             while (laco1 == 0)
@@ -418,18 +431,21 @@ int main()
                 printf("Valor invalido.\n");
                 while (getchar() != '\n')
                   ;
+                system("pause");
               }
               else
               {
                 if (novan1 > 5 || novan1 < 0)
                 {
                   printf("Valor invalido.\n");
+                  system("pause");
                 }
 
                 else
                 {
                   alunoEncontrado->n1 = novan1;
                   printf("Nota atualizada!\n");
+                  system("pause");
                   laco1 = 1;
                 }
               }
@@ -444,24 +460,28 @@ int main()
                 printf("Valor invalido.\n");
                 while (getchar() != '\n')
                   ;
+                system("pause");
               }
               else
               {
                 if (novan2 > 5 || novan2 < 0)
                 {
                   printf("Valor invalido.\n");
+                  system("pause");
                 }
                 else
                 {
                   alunoEncontrado->n2 = novan2;
                   printf("Nota atualizada!\n");
+                  system("pause");
                   laco2 = 1;
                 }
               }
             }
             break;
           default:
-            printf("Valor invalido.\n");
+            printf("\nValor invalido.\n");
+            system("pause");
             break;
           }
         }
@@ -540,10 +560,11 @@ int main()
           }
 
           printf("-----------------------------------------------------------------------------\n");
+          system("pause");
         }
         else
         {
-          printf("Aluno nao cadastrado e/ou valor invalido.\n");
+          printf("\nAluno nao cadastrado e/ou valor invalido.\n");
           break;
         }
         break;
@@ -569,7 +590,8 @@ int main()
 
           if (n1 == -1 && n2 == -1)
           { // Caso seja menor que 0 e Maior que 5
-            printf("Notas nao informadas.\n");
+            printf("\nNotas nao informadas.\n");
+            system("pause");
             break;
           }
           else
@@ -592,7 +614,8 @@ int main()
 
             if (notaFinal > 6)
             { // Se a soma de n1+n2 for Maior que 6, o aluno esta aprovado
-              printf("O aluno %s ja esta aprovado!\n", alunoEncontrado->nome);
+              printf("\nO aluno %s ja esta aprovado!\n", alunoEncontrado->nome);
+              system("pause");
             }
             else if (notaFinal < 6)
             { // Caso nao seja, o programa instrui a realizar a AF e retornar quando tiver feito
@@ -607,12 +630,14 @@ int main()
                     printf("Valor invalido.\n");
                     while (getchar() != '\n')
                       ;
+                    system("pause");
                   }
                   else
                   {
                     if (alunoEncontrado->n3 < 0 || alunoEncontrado->n3 > 5)
                     { // Se a nota obtida na AF for menor que 0 e Maior que 5
                       printf("Digite um valor de 0 a 5.");
+                      system("pause");
                     }
                     else
                     {
@@ -620,14 +645,16 @@ int main()
                       notaFinal = notaMaior + notaMenor;
                       if (notaFinal >= 6)
                       { // Caso a soma das notas seja superior ou igual a 6, o aluno esta aprovado.
-                        printf("\nO valor da nota final de %s e %d, portanto, APROVADO!", alunoEncontrado->nome, notaFinal);
+                        printf("\nO valor da nota final de %s e %d, portanto, APROVADO!\n", alunoEncontrado->nome, notaFinal);
                         alunoEncontrado->situacao = 1;
+                        system("pause");
                         case6 = 1;
                       }
                       else
                       { // Caso a soma das notas seja inferior a 6, o aluno esta reprovado.
-                        printf("\nO valor da nota final de %s e %d, portanto, REPROVADO!", alunoEncontrado->nome, notaFinal);
+                        printf("\nO valor da nota final de %s e %d, portanto, REPROVADO!\n", alunoEncontrado->nome, notaFinal);
                         alunoEncontrado->situacao = 0;
+                        system("pause");
                         case6 = 1;
                       }
                     }
@@ -640,6 +667,7 @@ int main()
         else
         {
           printf("RGM nao cadastrado e/ou invalido.\n");
+          system("pause");
         }
         break;
       }
@@ -662,35 +690,41 @@ int main()
           printf("\n|            3 - AF               |");
           printf("\n ---------------------------------");
           printf("\n Escolha uma nota para excluir: ");
-          if (scanf("%d", &escolha_EX_nota) == 0)
+          if (scanf("%d", &escolhaExcluirNota) == 0)
           {
             printf("Valor invalido.\n");
             while (getchar() != '\n')
               ;
+            system("pause");
           }
-          switch (escolha_EX_nota)
+          switch (escolhaExcluirNota)
           {
           case 1:
             alunoEncontrado->n1 = -1; // Nos tres casos, o programa acessa o valor n1, n2 e n3 e volta para os valores padroes
             printf("Nota excluida.\n");
+            system("pause");
             break;
           case 2:
             alunoEncontrado->n2 = -1;
             printf("Nota excluida.\n");
+            system("pause");
             break;
           case 3:
             alunoEncontrado->n3 = -1;
             alunoEncontrado->situacao = -1;
             printf("Nota excluida.\n");
+            system("pause");
             break;
           default:
             printf("Valor invalido.\n");
+            system("pause");
             break;
           }
         }
         else
         {
           printf("RGM invalido e/ou inexistente.\n");
+          system("pause");
         }
         break;
       }
@@ -722,6 +756,7 @@ int main()
             printf("Valor invalido.\n");
             while (getchar() != '\n')
               ;
+            system("pause");
           }
           switch (escolha)
           {
@@ -733,10 +768,12 @@ int main()
             {
               printf("O aluno %s foi excluido.\n", alunoEncontrado->nome);
               alunoEncontrado->ativo = 0;
+              system("pause");
             }
             else
             {
               printf("RGM invalido.\n");
+              system("pause");
             }
             break;
 
@@ -750,6 +787,7 @@ int main()
         else
         {
           printf("Aluno nao encontrado e/ou inexistente.\n");
+          system("pause");
         }
 
         break;
@@ -758,13 +796,10 @@ int main()
       //---------------------- EXPORTAR PARA CSV -----------------------------
       case 9:
         exportarCSV(alunos, totalAlunos);
-        break;
-      //----------------------- LIMPAR TERMINAL -----------------------------
-      case 10:
-        system("cls");
+        system("pause");
         break;
       //--------------------------- SAIR -----------------------------------
-      case 11: // Sair
+      case 10: // Sair
         printf("Saindo...\n");
         sair = 1;
         break;
@@ -772,6 +807,7 @@ int main()
       //----------------------- OPCAO INVALIDA -----------------------------
       default: // Opcao invalida
         printf("Opcao invalida.\n");
+        system("pause");
         break;
       }
     }
