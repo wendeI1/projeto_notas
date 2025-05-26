@@ -29,7 +29,6 @@ Este projeto é um sistema simples feito em C para gerenciar notas de alunos. El
 ## 🛠️ Tecnologias
 
 - Linguagem: **C**
-- Compilador sugerido: `gcc`
 - Plataforma: **Console / Terminal**
 
 ---
@@ -42,6 +41,39 @@ Este projeto é um sistema simples feito em C para gerenciar notas de alunos. El
 ├── projeto_notas.c         # Arquivo principal
 ├── README.md               # Este arquivo
 ```
+---
+
+## 💻 Como executar o projeto
+
+### Pré requisitos
+
+- Tenha o GIT instalado
+- Compilador sugerido: `gcc`
+
+---
+### Passos
+
+1. Clone o repositório
+   ```bash
+    git clone https://github.com/wendel1/projeto_notas.git
+    ```
+2. Abra o diretório do projeto
+   ```bash
+    cd projeto_notas
+    ```
+3. Compile o projeto
+   ```bash
+    gcc projeto_nota.c -o projeto_notas
+    ```
+4. Execute
+   ```bash
+    ./projeto_notas
+    ```
+5. Aquivos de saida
+    ```bash
+    /output
+    ```
+    
 ---
 
 ## 🚧 TO-DO
