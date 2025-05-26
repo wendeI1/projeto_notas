@@ -1,6 +1,6 @@
 # 📚 Sistema de Gerenciamento de Notas em C
 
-Este projeto é um sistema simples feito em C para gerenciar notas de alunos. Ele permite o cadastro, atualização, consulta e exclusão de informações, com foco em praticidade e organização no terminal.
+Este projeto é um sistema simples feito em C para gerenciar notas de alunos. Ele permite o cadastro, atualização, consulta, exclusão e exportação de informações, com foco em praticidade e organização no terminal.
 
 ---
 
@@ -42,6 +42,14 @@ Este projeto é um sistema simples feito em C para gerenciar notas de alunos. El
 ├── projeto_notas.c         # Arquivo principal
 ├── README.md               # Este arquivo
 ```
+---
+
+## 🚧 TO-DO
+
+Modularizar o código, separando em main.c, aluno.c e aluno.h<br>
+Revisar e corrigir eventuais bugs.<br>
+Implementar banco de dados.<br>
+
 ---
 
 ## ⚠️ Avisos
