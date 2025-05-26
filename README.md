@@ -1,6 +1,6 @@
 # 📚 Sistema de Gerenciamento de Notas em C
 
-Este projeto é um sistema simples feito em C para gerenciar notas de alunos. Ele permite o cadastro, atualização, consulta e exclusão de informações, com foco em praticidade e organização no terminal.
+Este projeto é um sistema simples feito em C para gerenciar notas de alunos. Ele permite o cadastro, atualização, consulta, exclusão e exportação de informações, com foco em praticidade e organização no terminal.
 
 ---
 
@@ -29,7 +29,6 @@ Este projeto é um sistema simples feito em C para gerenciar notas de alunos. El
 ## 🛠️ Tecnologias
 
 - Linguagem: **C**
-- Compilador sugerido: `gcc`
 - Plataforma: **Console / Terminal**
 
 ---
@@ -44,9 +43,50 @@ Este projeto é um sistema simples feito em C para gerenciar notas de alunos. El
 ```
 ---
 
+## 💻 Como executar o projeto
+
+### Pré requisitos
+
+- Tenha o GIT instalado
+- Compilador sugerido: `gcc`
+
+---
+### Passos
+
+1. Clone o repositório
+   ```bash
+    git clone https://github.com/wendel1/projeto_notas.git
+    ```
+2. Abra o diretório do projeto
+   ```bash
+    cd projeto_notas
+    ```
+3. Compile o projeto
+   ```bash
+    gcc projeto_nota.c -o projeto_notas
+    ```
+4. Execute
+   ```bash
+    ./projeto_notas
+    ```
+5. Aquivos de saida
+    ```bash
+    /output
+    ```
+    
+---
+
+## 🚧 TO-DO
+
+Modularizar o código, separando em main.c, aluno.c e aluno.h<br>
+Revisar e corrigir eventuais bugs.<br>
+Implementar banco de dados.<br>
+
+---
+
 ## ⚠️ Avisos
 1)
-Este projeto foi desenvolvido por mim, Wendel, durante o meu primeiro semestre do curso de Ciência da Computação.
+Este projeto foi desenvolvido por mim e alguns colegas de equipe durante o meu primeiro semestre do curso de Ciência da Computação.
 Ainda estou aprendendo os fundamentos da linguagem C e começando a usar o GitHub, então é possível que o código contenha falhas, más práticas ou esteja em desenvolvimento constante.
 Toda sugestão ou feedback construtivo é muito bem-vindo! 🙌
 
