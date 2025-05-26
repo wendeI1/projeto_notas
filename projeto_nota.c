@@ -277,7 +277,7 @@ int main()
             alunos[totalAlunos].n1 = -1;               // Aqui, define-se as notas em -1
             alunos[totalAlunos].n2 = -1;
             alunos[totalAlunos].n3 = -1;
-            alunos[totalAlunos].situacao = -1; // Aqui defini-se a situacao como -1
+            alunos[totalAlunos].situacao = -1; // Aqui define-se a situacao como -1
             alunos[totalAlunos].ativo = 1;
             totalAlunos++;
             sairmenuCAD = 1;
@@ -389,7 +389,7 @@ int main()
         //---------------------- ATUALIZAR NOTAS ---------------------------------
       case 4:
       {
-        int novan1, novan2; // Variaveis exclusivas daqui que recebem o valor inserido e, se forem ints, substituem o valor de alunos[index].n
+        int novan1, novan2;
         int laco1 = 0;
         int laco2 = 0;
         char validarRGM[8];
@@ -401,7 +401,7 @@ int main()
         if (alunoEncontrado != NULL)
         {
           if (alunoEncontrado->n1 == -1 || alunoEncontrado->n2 == -1)
-          { // Caso as notas sejam -1 (definidas como padroes), as notas nao sao informadas
+          {
             printf("\nNotas nao informadas\n");
             system("pause");
             break;
@@ -500,7 +500,7 @@ int main()
         if (alunoEncontrado != NULL)
         {
           printf("RGM:%s | Aluno: %s\n", alunoEncontrado->rgm, alunoEncontrado->nome); // Loop limitado ao total de alunos, mostrando todos eles de acordo com o ID
-          if (alunoEncontrado->n1 == -1)                                               // Nota da A1
+          if (alunoEncontrado->n1 == -1)
           {
             printf("A1: Nota nao informada.\n");
           }
@@ -570,12 +570,12 @@ int main()
         break;
       }
 
-        //---------------------- CALCULAR NF -----------------------------------
+        //---------------------- CALCULAR SITUACAO -----------------------------------
 
       case 6:
       {
         char validarRGM[8];
-        int notaMaior, notaMenor, notaFinal; // Calculos de NF
+        int notaMaior, notaMenor, notaFinal;
         int case6 = 0;
 
         printf("Digite o RGM do aluno: ");
@@ -682,7 +682,7 @@ int main()
 
         Aluno *alunoEncontrado = verificarRGM(alunos, totalAlunos, validarRGM);
         if (alunoEncontrado != NULL)
-        { // Caso o aluno nao esteja cadastrado, o programa nao avanca, prevenindo erros
+        {
           printf("\n --------- Excluir notas ---------");
           printf("\n|      Excluindo notas de: %s     |", alunoEncontrado->nome);
           printf("\n|            1 - A1               |");
@@ -799,13 +799,13 @@ int main()
         system("pause");
         break;
       //--------------------------- SAIR -----------------------------------
-      case 10: // Sair
+      case 10:
         printf("Saindo...\n");
         sair = 1;
         break;
 
       //----------------------- OPCAO INVALIDA -----------------------------
-      default: // Opcao invalida
+      default:
         printf("Opcao invalida.\n");
         system("pause");
         break;
