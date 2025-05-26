@@ -46,7 +46,7 @@ Este projeto é um sistema simples feito em C para gerenciar notas de alunos. El
 
 ## ⚠️ Avisos
 1)
-Este projeto foi desenvolvido por mim, Wendel, durante o meu primeiro semestre do curso de Ciência da Computação.
+Este projeto foi desenvolvido por mim e alguns colegas de equipe durante o meu primeiro semestre do curso de Ciência da Computação.
 Ainda estou aprendendo os fundamentos da linguagem C e começando a usar o GitHub, então é possível que o código contenha falhas, más práticas ou esteja em desenvolvimento constante.
 Toda sugestão ou feedback construtivo é muito bem-vindo! 🙌
 
